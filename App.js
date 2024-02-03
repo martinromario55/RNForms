@@ -14,7 +14,16 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <Status style="auto" />
-      <TextInput style={styles.input} value={name} onChangeText={setName} />
+      <TextInput
+        style={styles.input}
+        value={name}
+        onChangeText={setName}
+        placeholder="Enter name"
+        // secureTextEntry
+        // keyboardType="numeric"
+        autoCorrect={false}
+        autoCapitalize="none"
+      />
       <Text style={styles.text}>My name is {name}</Text>
     </SafeAreaView>
   )
