@@ -18,6 +18,18 @@ export default function App() {
   // useState
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState({})
+
+  // Validate form
+  const validateForm = () => {
+    const errors = {}
+    if (!username) errors.username = 'Username is required'
+    if (!password) errors.password = 'Password is required'
+
+    setErrors(errors)
+
+    return Object.keys(errors).length === 0
+  }
 
   return (
     <KeyboardAvoidingView
@@ -38,6 +50,9 @@ export default function App() {
           value={username}
           onChangeText={text => setUsername(text)}
         />
+        {errors.username && (
+          <Text style={styles.errorText}>{errors.username}</Text>
+        )}
         <Text style={styles.label}>Password</Text>
         <TextInput
           style={styles.input}
@@ -46,6 +61,9 @@ export default function App() {
           value={password}
           onChangeText={text => setPassword(text)}
         />
+        {errors.password && (
+          <Text style={styles.errorText}>{errors.password}</Text>
+        )}
         <Button title="Login" onPress={() => {}} />
       </View>
     </KeyboardAvoidingView>
@@ -90,5 +108,9 @@ const styles = StyleSheet.create({
     height: 400,
     alignSelf: 'center',
     marginBottom: 50,
+  },
+  errorText: {
+    color: 'red',
+    marginBottom: 10,
   },
 })
