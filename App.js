@@ -9,6 +9,9 @@ import {
   TextInput,
   Switch,
   Button,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native'
 
 export default function App() {
@@ -17,9 +20,17 @@ export default function App() {
   const [password, setPassword] = useState('')
 
   return (
-    <SafeAreaView style={styles.container}>
+    <KeyboardAvoidingView
+      behavior="padding"
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 150 : 0}
+      style={styles.container}
+    >
       <Status style="auto" />
       <View style={styles.form}>
+        <Image
+          source={require('./assets/adaptive-icon.png')}
+          style={styles.image}
+        />
         <Text style={styles.label}>Username</Text>
         <TextInput
           style={styles.input}
@@ -37,7 +48,7 @@ export default function App() {
         />
         <Button title="Login" onPress={() => {}} />
       </View>
-    </SafeAreaView>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -73,5 +84,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 15,
     padding: 10,
+  },
+  image: {
+    width: 200,
+    height: 400,
+    alignSelf: 'center',
+    marginBottom: 50,
   },
 })
